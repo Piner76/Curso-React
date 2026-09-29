@@ -1,0 +1,105 @@
+/* src/componentes/layout/Footer.module.css */
+.footer {
+  background-color: #131518;
+  color: #f4f4f4;
+  margin-top: 40px;
+}
+
+.columnas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 32px;
+  padding: 48px 32px 32px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.columna h3,
+.columna h4 {
+  color: #eab308;
+  margin-bottom: 12px;
+}
+
+.marca {
+  font-size: 1.3rem;
+}
+
+.columna p {
+  font-size: 0.9rem;
+  color: #cccccc;
+  line-height: 1.5;
+}
+
+.columna ul {
+  list-style: none;
+}
+
+.columna ul li {
+  font-size: 0.9rem;
+  color: #cccccc;
+  margin-bottom: 8px;
+}
+
+.columna ul li a {
+  color: #cccccc;
+  text-decoration: none;
+}
+
+.columna ul li a:hover {
+  color: #eab308;
+}
+
+.newsletter {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.newsletter input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 4px;
+  border: none;
+  min-width: 0;
+}
+
+.newsletter button {
+  background-color: #eab308;
+  color: #1a1a1d;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.newsletter button:hover {
+  background-color: #f5c518;
+}
+
+.equipoSeccion {
+  border-top: 1px solid #2a2d33;
+  padding: 32px;
+  text-align: center;
+}
+
+.equipoTitulo {
+  color: #eab308;
+  margin-bottom: 24px;
+}
+
+.equipoGrid {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.barraInferior {
+  border-top: 1px solid #2a2d33;
+  text-align: center;
+  padding: 16px;
+  font-size: 0.85rem;
+  color: #999999;
+}

@@ -1,0 +1,20 @@
+.contenedor {
+  padding: 32px;
+}
+
+.contenedor h2 {
+  margin-bottom: 24px;
+  color: #eab308;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.mensaje {
+  padding: 48px;
+  text-align: center;
+  font-size: 1.2rem;
+}

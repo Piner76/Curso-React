@@ -1,0 +1,79 @@
+.detalle {
+  padding: 32px;
+}
+
+.volver {
+  display: inline-block;
+  margin-bottom: 24px;
+  color: #eab308;
+  text-decoration: none;
+}
+
+.volver:hover {
+  text-decoration: underline;
+}
+
+.contenido {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.imagen {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.info {
+  flex: 1;
+  min-width: 260px;
+}
+
+.info h2 {
+  color: #eab308;
+  margin-bottom: 4px;
+}
+
+.categoria {
+  color: #b0b0b0;
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+}
+
+.descripcion {
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.precio {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.stock {
+  color: #b0b0b0;
+  margin-bottom: 24px;
+}
+
+.botonAgregar {
+  background-color: #eab308;
+  color: #1a1a1d;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.botonAgregar:hover {
+  background-color: #f5c518;
+}
+
+.mensaje {
+  padding: 48px;
+  text-align: center;
+  font-size: 1.2rem;
+}

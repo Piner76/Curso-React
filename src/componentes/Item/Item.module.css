@@ -1,0 +1,129 @@
+.card {
+  background: #232b37;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  transition: transform 0.3s;
+  color: #f4f4f4;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+.imagen {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.info {
+  padding: 12px 16px 20px;
+}
+
+.info h3 {
+  font-size: 1.2rem;
+  margin-bottom: 4px;
+}
+
+.descripcion {
+  font-size: 0.85rem;
+  color: #b0b0b0;
+  margin-bottom: 8px;
+}
+
+.precio {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #eab308;
+}
+.link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.controles {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 12px 0;
+}
+
+.botonCantidad {
+  background-color: #2c3646;
+  color: #f4f4f4;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.botonCantidad:hover {
+  background-color: #3a4658;
+}
+
+.cantidad {
+  min-width: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.botonAgregar {
+  width: 100%;
+  background-color: #eab308;
+  color: #1a1a1d;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.botonAgregar:hover {
+  background-color: #f5c518;
+}
+
+.controles {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 12px 0;
+}
+
+.botonCantidad {
+  background-color: #2c3646;
+  color: #f4f4f4;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.botonCantidad:hover {
+  background-color: #3a4658;
+}
+
+.cantidad {
+  min-width: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.botonAgregar {
+  width: 100%;
+  background-color: #eab308;
+  color: #1a1a1d;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.botonAgregar:hover {
+  background-color: #f5c518;
+}

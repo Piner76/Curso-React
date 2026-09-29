@@ -1,0 +1,65 @@
+.banner {
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  margin: 24px 32px;
+  padding: 48px 32px;
+  height: 320px;
+  display: flex;
+  justify-content: center; /* 👈 centra el bloque de texto horizontalmente */
+  align-items: center; /* ya centraba verticalmente */
+  color: #f4f4f4;
+  position: relative; /* 👈 necesario para que el botón se ubique respecto a este banner */
+  overflow: hidden;
+}
+
+.bannerContenido {
+  text-align: center; /* 👈 centra el texto dentro de su propia caja */
+}
+
+.bannerContenido h1 {
+  color: #eab308;
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.bannerContenido p {
+  font-size: 1.6rem;
+  margin-bottom: 200px;
+}
+
+.botonComprar {
+  position: absolute; /* 👈 lo saca del flujo normal */
+  top: 24px;
+  right: 32px;
+  background-color: #eab308;
+  color: #1a1a1d;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.botonComprar:hover {
+  background-color: #f5c518;
+}
+
+.presentacion {
+  background-color: #0c0f16;
+  color: #f4f4f4;
+  text-align: center;
+  padding: 24px 48px;
+  margin: 0 22px 22px 32px;
+  border-radius: 8px;
+  font-size: 1.6rem;
+}
+
+.categorias {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 32px 48px 32px;
+}
