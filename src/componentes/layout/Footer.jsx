@@ -38,7 +38,7 @@ function Footer() {
         <div className={styles.columna}>
           <h4>Contacto</h4>
           <ul>
-            <li>Av. Siempre Viva 742, CABA</li>
+            <li>Av. Juramento 370, CABA</li>
             <li>Tel: (011) 4444-5555</li>
             <li>info@rincondelbrindis.com</li>
           </ul>

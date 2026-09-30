@@ -3,7 +3,6 @@ import Item from "../Item/Item";
 import styles from "./ItemListContainer.module.css";
 
 function ItemListContainer({ mensaje }) {
-  // Los 3 estados clásicos de la Clase 5
   const [productos, setProductos] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
@@ -47,7 +46,7 @@ function ItemListContainer({ mensaje }) {
             descripcion={producto.descripcion}
             precio={producto.precio}
             imagen={producto.imagen}
-            stock={producto.stock} // 👈 nuevo
+            stock={producto.stock}
           />
         ))}
       </div>

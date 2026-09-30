@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import styles from "./ItemDetailContainer.module.css";
 
 function ItemDetailContainer() {
-  const { id } = useParams(); // toma el :id de la URL
+  const { id } = useParams();
 
   const [producto, setProducto] = useState(null);
   const [cargando, setCargando] = useState(true);
@@ -18,9 +18,6 @@ function ItemDetailContainer() {
         return respuesta.json();
       })
       .then((datos) => {
-        // Buscamos, dentro de todos los productos, el que coincide con el id de la URL.
-        // OJO: el id de la URL siempre es texto (string), por eso comparamos
-        // convirtiéndolo a número con Number(id).
         const encontrado = datos.find((p) => p.id === Number(id));
         setProducto(encontrado);
       })

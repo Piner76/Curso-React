@@ -4,8 +4,8 @@
 }
 
 .foto {
-  width: 90px;
-  height: 90px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   object-fit: cover;
   margin: 0 auto 8px;
@@ -14,10 +14,10 @@
 
 .tarjeta h4 {
   margin-bottom: 4px;
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 
 .tarjeta p {
-  font-size: 0.85rem;
+  font-size: 0.65rem;
   color: #b0b0b0;
 }
