@@ -1,5 +1,4 @@
 .card {
-  background: #232b37;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
   overflow: hidden;
@@ -21,6 +20,7 @@
 .info {
   text-align: center;
   padding: 8px 16px 20px;
+  color: rgba(18, 16, 14, 0.926);
 }
 
 .info h3 {
@@ -30,5 +30,5 @@
 
 .info p {
   font-size: 1rem;
-  color: #b0b0b0;
+  color: #0e0e0ef4;
 }

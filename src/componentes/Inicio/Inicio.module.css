@@ -2,15 +2,16 @@
   background-size: cover;
   background-position: center;
   border-radius: 8px;
-  margin: 24px 32px;
+
   padding: 48px 32px;
-  height: 320px;
+  height: 220px;
   display: flex;
   justify-content: center; /* 👈 centra el bloque de texto horizontalmente */
   align-items: center; /* ya centraba verticalmente */
   color: #f4f4f4;
   position: relative; /* 👈 necesario para que el botón se ubique respecto a este banner */
   overflow: hidden;
+  height: 80px;
 }
 
 .bannerContenido {
@@ -18,22 +19,23 @@
 }
 
 .bannerContenido h1 {
-  color: #eab308;
-  margin-bottom: 20px;
+  color: #232b37;
+  margin-top: 100px;
   font-size: 2rem;
 }
 
 .bannerContenido p {
   font-size: 1.6rem;
-  margin-bottom: 200px;
+  margin-bottom: 150px;
+  color: #232b37;
 }
 
 .botonComprar {
   position: absolute; /* 👈 lo saca del flujo normal */
   top: 24px;
-  right: 32px;
-  background-color: #eab308;
-  color: #1a1a1d;
+  right: 60px;
+  background-color: #232b37;
+  color: #fbfbfc;
   border: none;
   padding: 10px 20px;
   border-radius: 4px;
@@ -50,7 +52,7 @@
   color: #f4f4f4;
   text-align: center;
   padding: 24px 48px;
-  margin: 0 22px 22px 32px;
+
   border-radius: 8px;
   font-size: 1.6rem;
 }

@@ -13,13 +13,18 @@ function Header() {
             <Link to="/">Inicio</Link>
           </li>
           <li>
-            <Link to="/productos">Productos</Link>
-          </li>
-          <li>
-            <Link to="/carrito">Carrito</Link>
+            <Link
+              to="/productos"
+              className={({ isActive }) => (isActive ? styles.active : "")}
+            >
+              Productos
+            </Link>
           </li>
         </ul>
       </nav>
+      <div className={styles.carrito}>
+        <span>Carrito 0 🛒</span>
+      </div>
     </header>
   );
 }
