@@ -25,7 +25,9 @@ export const arrayProductos = [
     categoria: "Cerveza",
     descripcion: "Cerveza Corona",
     precio: 1500,
+    stock: 10,
     img: "https://images.unsplash.com/photo-1608270586620-248524c67de9?w=400",
+    activo: true,
   },
   {
     id: 2,
@@ -34,6 +36,7 @@ export const arrayProductos = [
     precio: 800,
     stock: 10,
     img: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=400",
+    activo: true,
   },
   {
     id: 3,
@@ -42,6 +45,7 @@ export const arrayProductos = [
     precio: 4500,
     stock: 10,
     img: "https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=400",
+    activo: true,
   },
   {
     id: 4,
@@ -50,6 +54,7 @@ export const arrayProductos = [
     precio: 300,
     stock: 10,
     img: "https://images.unsplash.com/photo-1567696911980-2eed69a46042?w=400",
+    activo: false,
   },
   {
     id: 5,
@@ -58,6 +63,7 @@ export const arrayProductos = [
     precio: 2200,
     stock: 20,
     img: "https://images.unsplash.com/photo-1567696911980-2eed69a46042?w=400",
+    activo: true,
   },
   {
     id: 6,
@@ -66,5 +72,6 @@ export const arrayProductos = [
     precio: 2200,
     stock: 10,
     img: "https://images.unsplash.com/photo-1584225065152-4a1454aa3d4e?w=400",
+    activo: true,
   },
 ];

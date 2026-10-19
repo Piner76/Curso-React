@@ -50,9 +50,9 @@ function Item({ id, nombre, descripcion, precio, imagen, stock }) {
     <article className={styles.card}>
       <img src={imagen} alt={nombre} className={styles.imagen} />
       <div className={styles.info}>
-        <h3>{nombre}</h3>
+        <p className={styles.precio}>$ {precio}</p>
+        {/* <h3>{nombre}</h3> */}
         <p className={styles.descripcion}>{descripcion}</p>
-        <p className={styles.precio}>${precio}</p>
 
         <div className={styles.controles}>
           <button onClick={decrementar} className={styles.botonCantidad}>

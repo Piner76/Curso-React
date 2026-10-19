@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import styles from "./Header.module.css";
 
 function Header() {
@@ -13,12 +13,15 @@ function Header() {
             <Link to="/">Inicio</Link>
           </li>
           <li>
-            <Link
-              to="/productos"
+            <Link to="/productos">Productos</Link>
+          </li>
+          <li>
+            <NavLink
+              to="/comprar"
               className={({ isActive }) => (isActive ? styles.active : "")}
             >
-              Productos
-            </Link>
+              Comprar
+            </NavLink>
           </li>
         </ul>
       </nav>

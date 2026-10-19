@@ -1,0 +1,98 @@
+.tabla_container {
+  display: inline-block; /* Cambia de block a inline-block para ajustarse a la tabla */
+  max-width: 150%;
+  overflow-x: auto;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.tabla_container h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1e293b;
+  text-align: center; /* Centra el título respecto a la tabla */
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  color: #334155;
+  text-align: left;
+}
+
+/* Encabezado CORREGIDO: Se eliminó display: flex y sus derivados */
+.tabla thead {
+  background-color: #f1f5f9;
+  color: #475569;
+  padding: 12px 60px;
+}
+
+.tabla thead th {
+  padding: 12px 60px;
+  font-weight: 600;
+  white-space: nowrap;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left; /* Asegura que los títulos se alineen igual que los datos */
+}
+
+/* Cuerpo CORREGIDO: Se eliminó display y flex que rompen el diseño tabular */
+.tabla_tbody {
+  padding: 12px 60px;
+
+  white-space: nowrap;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left; /* Asegura que los títulos se alineen igual que los datos */
+}
+
+/* Filas */
+.tabla tbody tr {
+  padding: 12px 60px;
+  cursor: pointer;
+  transition: background-color 0.18s ease;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.tabla-monedas tbody tr {
+  background-color: #f8fafc;
+}
+
+/* Fila seleccionada (Simplificado) */
+.tabla tbody tr.fila-seleccionada {
+  background-color: rgba(49, 66, 82, 0.18);
+}
+
+/* Celdas */
+.tabla tbody td {
+  padding: 11px 60px;
+  vertical-align: middle;
+}
+
+/* Identificadores y valores numéricos */
+.tabla .dato_id {
+  font-family: "Consolas", "Courier New", monospace;
+  color: #1b1a1a;
+  font-weight: bold;
+}
+
+/* Etiquetas de estado */
+.estado {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.estado.activa {
+  background-color: #495d50;
+  color: #166534;
+}
+
+.estado.inactiva {
+  background-color: #495d50;
+  color: #a32e00;
+}
