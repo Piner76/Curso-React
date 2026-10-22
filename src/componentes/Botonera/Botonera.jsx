@@ -1,5 +1,4 @@
 import styles from "./Botonera.module.css";
-import { useState } from "react";
 
 export default function AbmToolbar({
   onAlta,
@@ -8,9 +7,9 @@ export default function AbmToolbar({
   haySeleccion,
 }) {
   return (
-    <div className={[styles.container]}>
-      <button type="button" onClick={onAlta} className={[styles.btn_alta]}>
-        <plus size={16} />
+    <div className={styles.container}>
+      <button type="button" onClick={onAlta} className={styles.btn_alta}>
+        +
         Alta
       </button>
 
@@ -18,9 +17,8 @@ export default function AbmToolbar({
         type="button"
         onClick={onModificar}
         disabled={!haySeleccion}
-        className={[styles.btn_modificar]}
+        className={styles.btn_modificar}
       >
-        <pencil size={16} />
         Modificación
       </button>
 
@@ -28,9 +26,8 @@ export default function AbmToolbar({
         type="button"
         onClick={onBaja}
         disabled={!haySeleccion}
-        className={[styles.btn_eliminar]}
+        className={styles.btn_eliminar}
       >
-        <trash2 size={16} />
         Baja
       </button>
     </div>

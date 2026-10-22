@@ -1,68 +1,115 @@
-const formStyle = {
-  display: "flex",
-  flexDirection: "column",
-  maxWidth: "48rem",
-  margin: "3rem auto",
-  padding: "1.5rem",
-  border: "1px solid #ddd",
-  borderRadius: "8px",
-  gap: "16px",
-  color: "#333",
-};
+import styles from "./FormProducto.module.css";
 
-export function Producto({ datosForm, manejarCambio, manejarEnvio }) {
-  <form style={formStyle} onSubmit={manejarEnvio}>
-    <div>
-      <label htmlFor="categoria">Categoría:</label>
-      <input
-        type="text"
-        id="categoria"
-        name="categoria"
-        value={datosForm.categoria}
-        onChange={manejarCambio}
-      />
-    </div>
-    <div>
-      <label htmlFor="producto">Producto:</label>
-      <input
-        type="text"
-        id="producto"
-        name="producto"
-        value={datosForm.producto}
-        onChange={manejarCambio}
-      />
-    </div>
-    <div>
-      <label htmlFor="precio">Precio:</label>
-      <input
-        type="number"
-        id="precio"
-        name="precio"
-        value={datosForm.precio}
-        onChange={manejarCambio}
-      />
-    </div>
-    <div>
-      <label htmlFor="stock">Stock:</label>
-      <input
-        type="number"
-        id="stock"
-        name="stock"
-        value={datosForm.stock}
-        onChange={manejarCambio}
-      />
-    </div>
-    <div>
-      <label htmlFor="img">Imagen:</label>
-      <input
-        type="text"
-        id="img"
-        name="img"
-        value={datosForm.img}
-        onChange={manejarCambio}
-      />
-    </div>
-    {/* Aquí puedes agregar los otros 2 atributos del formulario en el futuro */}
-    <button type="submit">Guardar Producto</button>
-  </form>;
+export function Producto({
+  datosForm,
+  manejarCambio,
+  manejarEnvio,
+  manejarCambioImagen,
+  onCerrar,
+}) {
+  const handleSubmit = (evento) => {
+    manejarEnvio(evento);
+    onCerrar();
+  };
+
+  return (
+    <dialog
+      className={styles.modal}
+      aria-labelledby="titulo-form-producto"
+      onCancel={(evento) => {
+        evento.preventDefault();
+        onCerrar();
+      }}
+      onClick={(evento) => {
+        if (evento.target === evento.currentTarget) onCerrar();
+      }}
+      ref={(dialogo) => {
+        if (dialogo && !dialogo.open) dialogo.showModal();
+      }}
+    >
+      <div className={styles.modal_header}>
+        <h2 id="titulo-form-producto">Alta de producto</h2>
+        <button
+          type="button"
+          className={styles.boton_cerrar}
+          onClick={onCerrar}
+          aria-label="Cerrar formulario"
+        >
+          ×
+        </button>
+      </div>
+      <form className={styles.formulario} onSubmit={handleSubmit}>
+        <label>
+          Categoría
+          <input
+            type="text"
+            name="categoria"
+            value={datosForm.categoria}
+            onChange={manejarCambio}
+            required
+          />
+        </label>
+        <label>
+          Producto
+          <input
+            type="text"
+            name="producto"
+            value={datosForm.producto}
+            onChange={manejarCambio}
+            required
+          />
+        </label>
+        <label>
+          Precio
+          <input
+            type="number"
+            name="precio"
+            min="0"
+            step="0.01"
+            value={datosForm.precio}
+            onChange={manejarCambio}
+            required
+          />
+        </label>
+        <label>
+          Stock
+          <input
+            type="number"
+            name="stock"
+            min="0"
+            step="1"
+            value={datosForm.stock}
+            onChange={manejarCambio}
+            required
+          />
+        </label>
+        <label>
+          Imagen
+          <input
+            type="file"
+            placeholder="https://"
+            name="img"
+            onChange={manejarCambioImagen}
+          />
+        </label>
+        <label className={styles.campo_checkbox}>
+          <input
+            type="checkbox"
+            name="activo"
+            checked={datosForm.activo}
+            onChange={manejarCambio}
+          />
+          Producto activo
+        </label>
+        <div className={styles.formulario_acciones}>
+          <button type="button" onClick={onCerrar}>
+            Cancelar
+          </button>
+          <button type="submit">Guardar producto</button>
+        </div>
+      </form>
+    </dialog>
+  );
 }
+
+export default Producto;

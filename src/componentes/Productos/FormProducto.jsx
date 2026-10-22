@@ -1,45 +1,66 @@
 import AbmToolbar from "../Botonera/Botonera";
 import styles from "./FormProducto.module.css";
 import { arrayProductos } from "../../../public/data/productos.js";
+import Producto from "./Productos.jsx";
+import { useState } from "react";
 
-export function FormProducto() {
+export function FormProducto({
+  datosForm,
+  manejarCambio,
+  manejarEnvio,
+  manejarCambioImagen,
+}) {
+  const [mostrarModal, setMostrarModal] = useState(false);
+
   return (
-    <div className={[styles.tabla_container]}>
+    <div className={styles.tabla_container}>
       <h3>Productos</h3>
       <AbmToolbar
-        onAlta={() => alert("Alta de producto")}
+        onAlta={() => setMostrarModal(true)}
         onModificar={() => alert("Modificar producto")}
         onBaja={() => alert("Baja de producto")}
-        haySeleccion={true} // Cambiar según la lógica de selección
+        haySeleccion={true}
       />
 
-      <div className={[styles.tabla]}>
-        <thead className={[styles.tabla_thead]}>
-          <th className={[styles.tabla_th]}>ID</th>
-          <th className={[styles.tabla_th]}>Categoría</th>
-          <th className={[styles.tabla_th]}>Producto</th>
-          <th className={[styles.tabla_th]}>Precio</th>
-          <th className={[styles.tabla_th]}>Stock</th>
-          <th className={[styles.tabla_th]}>Activo</th>
+      <table className={styles.tabla}>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Categoría</th>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Activo</th>
+          </tr>
         </thead>
 
-        <tbody className={[styles.tabla_tbody]}>
+        <tbody className={styles.tabla_tbody}>
           {arrayProductos.map((producto) => (
-            <tr key={producto.id} className={[styles.tabla_tr]}>
-              <td className={[styles.dato_id]}>{producto.id}</td>
-              <td className={[styles.tabla_td]}>{producto.categoria}</td>
-              <td className={[styles.tabla_td]}>{producto.descripcion}</td>
-              <td className={[styles.dato_id]}>
+            <tr key={producto.id}>
+              <td className={styles.dato_id}>{producto.id}</td>
+              <td>{producto.categoria}</td>
+              <td>{producto.descripcion}</td>
+              <td className={styles.dato_id}>
                 ${producto.precio.toFixed(2)}
               </td>
-              <td className={[styles.tabla_td]}>{producto.stock}</td>
-              <td className={[styles.activa]}>
+              <td>{producto.stock}</td>
+              <td>
                 {producto.activo ? "Sí" : "No"}
               </td>
             </tr>
           ))}
         </tbody>
-      </div>
+      </table>
+
+      {mostrarModal && (
+        <Producto
+          datosForm={datosForm}
+          manejarCambio={manejarCambio}
+          manejarEnvio={manejarEnvio}
+          manejarCambioImagen={manejarCambioImagen}
+          onCerrar={() => setMostrarModal(false)}
+        />
+      )}
     </div>
   );
 }

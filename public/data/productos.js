@@ -62,7 +62,7 @@ export const arrayProductos = [
     descripcion: "Cerveza Patagonia Amber",
     precio: 2200,
     stock: 20,
-    img: "https://images.unsplash.com/photo-1567696911980-2eed69a46042?w=400",
+    img: "https://i.ibb.co/Q7zvFT3G/corona.jpg",
     activo: true,
   },
   {
@@ -71,7 +71,7 @@ export const arrayProductos = [
     descripcion: "Cerveza Quilmes",
     precio: 2200,
     stock: 10,
-    img: "https://images.unsplash.com/photo-1584225065152-4a1454aa3d4e?w=400",
+    img: "https://i.ibb.co/Pv3NCM1t/amstel.jpg",
     activo: true,
   },
 ];

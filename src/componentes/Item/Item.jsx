@@ -1,25 +1,10 @@
-import { Link } from "react-router-dom";
 import styles from "./Item.module.css";
 import { useState } from "react";
+import { useCart } from "../../context/CartContext";
 
-// function Item({ id, nombre, descripcion, precio, imagen }) {
-//   return (
-//     <Link to={`/producto/${id}`} className={styles.link}>
-//       <article className={styles.card}>
-//         <img src={imagen} alt={nombre} className={styles.imagen} />
-//         <div className={styles.info}>
-//           <h3>{nombre}</h3>
-//           <p className={styles.descripcion}>{descripcion}</p>
-//           <p className={styles.precio}>${precio}</p>
-//         </div>
-//       </article>
-//     </Link>
-//   );
-// }
-
-// export default Item;
 function Item({ id, nombre, descripcion, precio, imagen, stock }) {
   const [cantidad, setCantidad] = useState(0);
+  const { addToCart } = useCart();
 
   const incrementar = (e) => {
     e.preventDefault();
@@ -40,9 +25,9 @@ function Item({ id, nombre, descripcion, precio, imagen, stock }) {
   const agregarAlCarrito = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (cantidad > 0) {
-      alert(`Agregaste ${cantidad} ${nombre} al carrito`);
-    }
+    if (cantidad === 0) return;
+
+    addToCart({ id, nombre, descripcion, precio, imagen }, cantidad);
   };
 
   return (
@@ -64,8 +49,12 @@ function Item({ id, nombre, descripcion, precio, imagen, stock }) {
           </button>
         </div>
 
-        <button onClick={agregarAlCarrito} className={styles.botonAgregar}>
-          Agregar al Carrito
+        <button
+          onClick={agregarAlCarrito}
+          className={styles.botonAgregar}
+          disabled={cantidad === 0}
+        >
+          Agregar al Carrito {cantidad}
         </button>
       </div>
     </article>

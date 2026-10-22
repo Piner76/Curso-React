@@ -1,7 +1,12 @@
 import { Link, NavLink } from "react-router-dom";
 import styles from "./Header.module.css";
+import { useCart } from "../../context/CartContext.jsx";
 
 function Header() {
+  //usamos el hook para acceder a la function
+  const { getCartQuantity } = useCart();
+  const totalItems = getCartQuantity();
+
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
@@ -26,7 +31,9 @@ function Header() {
         </ul>
       </nav>
       <div className={styles.carrito}>
-        <span>Carrito 0 🛒</span>
+        <Link to="/carrito">
+          Carrito 🛒 {totalItems > 0 && <span>{totalItems}</span>}
+        </Link>
       </div>
     </header>
   );
