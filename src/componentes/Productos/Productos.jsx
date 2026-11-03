@@ -40,11 +40,11 @@ export function Producto({
       </div>
       <form className={styles.formulario} onSubmit={handleSubmit}>
         <label>
-          Categoría
+          Articulos
           <input
             type="text"
-            name="categoria"
-            value={datosForm.categoria}
+            name="Artnom"
+            value={datosForm.Artnom}
             onChange={manejarCambio}
             required
           />
@@ -53,8 +53,8 @@ export function Producto({
           Producto
           <input
             type="text"
-            name="producto"
-            value={datosForm.producto}
+            name="ProNom"
+            value={datosForm.ProNom}
             onChange={manejarCambio}
             required
           />
@@ -63,10 +63,10 @@ export function Producto({
           Precio
           <input
             type="number"
-            name="precio"
+            name="Precio"
             min="0"
             step="0.01"
-            value={datosForm.precio}
+            value={datosForm.Precio}
             onChange={manejarCambio}
             required
           />
@@ -75,10 +75,10 @@ export function Producto({
           Stock
           <input
             type="number"
-            name="stock"
+            name="Stock"
             min="0"
             step="1"
-            value={datosForm.stock}
+            value={datosForm.Stock}
             onChange={manejarCambio}
             required
           />
@@ -95,11 +95,11 @@ export function Producto({
         <label className={styles.campo_checkbox}>
           <input
             type="checkbox"
-            name="activo"
-            checked={datosForm.activo}
+            name="Activo"
+            checked={datosForm.Activo}
             onChange={manejarCambio}
           />
-          Producto activo
+          Producto Activo
         </label>
         <div className={styles.formulario_acciones}>
           <button type="button" onClick={onCerrar}>

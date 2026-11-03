@@ -31,9 +31,8 @@ function Header() {
         </ul>
       </nav>
       <div className={styles.carrito}>
-        <Link to="/carrito">
-          Carrito 🛒 {totalItems > 0 && <span>{totalItems}</span>}
-        </Link>
+        <NavLink to="/carrito" />
+        🛒 {totalItems > 0 && <span>{totalItems}</span>}
       </div>
     </header>
   );
