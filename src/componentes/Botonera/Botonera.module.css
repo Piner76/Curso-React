@@ -38,9 +38,15 @@
   transition-duration: 0.2s; */
 }
 
-.btn_modificar:hover {
+.btn_modificar:hover:not(:disabled) {
   background-color: #edc584;
   color: #f5f1f1;
+}
+
+.btn_modificar:disabled,
+.btn_eliminar:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .btn_eliminar {
@@ -57,7 +63,7 @@
   transition-duration: 0.2s;
 } */
 
-  .btn_eliminar:hover {
+  .btn_eliminar:hover:not(:disabled) {
     background-color: #eccccc;
   }
 }

@@ -2,14 +2,20 @@ import styles from "./FormProducto.module.css";
 
 export function Producto({
   datosForm,
+  categorias = [],
   manejarCambio,
   manejarEnvio,
   manejarCambioImagen,
   onCerrar,
 }) {
+ 
   const handleSubmit = (evento) => {
-    manejarEnvio(evento);
-    onCerrar();
+    evento.preventDefault(); // Valor por defecto por si tarda en cargar
+    const exito = manejarEnvio(evento);
+
+    if (exito){
+      onCerrar();
+    }
   };
 
   return (
@@ -39,16 +45,24 @@ export function Producto({
         </button>
       </div>
       <form className={styles.formulario} onSubmit={handleSubmit}>
+            
         <label>
-          Articulos
-          <input
-            type="text"
-            name="Artnom"
-            value={datosForm.Artnom}
+          Categoría
+          <select
+            name="CategoriaId"
+            value={datosForm.CategoriaId}
             onChange={manejarCambio}
             required
-          />
+          >
+            <option value="">Selecciona una categoría</option>
+            {categorias.map((categoria) => (
+              <option key={categoria.id} value={categoria.id}>
+                {categoria.CatNom}
+              </option>
+            ))}
+          </select>
         </label>
+      
         <label>
           Producto
           <input
@@ -57,6 +71,15 @@ export function Producto({
             value={datosForm.ProNom}
             onChange={manejarCambio}
             required
+          />
+        </label>
+        <label>
+          Descripción
+          <textarea
+            name="Descripcion"
+            value={datosForm.Descripcion}
+            onChange={manejarCambio}
+            rows={3}
           />
         </label>
         <label>

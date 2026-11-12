@@ -44,6 +44,17 @@
   background-color: #f8fafc;
 }
 
+/* Fila seleccionada mediante el checkbox */
+.tabla tbody tr.fila_seleccionada,
+.tabla tbody tr.fila_seleccionada:hover {
+  background-color: #e9e2f7; /* violeta suave combinando con #422d76 */
+  box-shadow: inset 3px 0 0 #422d76;
+}
+
+.tabla tbody tr.fila_seleccionada td {
+  font-weight: 600;
+}
+
 .tabla .dato_id {
   font-family: "Consolas", "Courier New", monospace;
   color: #1b1a1a;
@@ -114,6 +125,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  font-size: 1.0rem;
 }
 
 .formulario_acciones {
@@ -130,6 +142,17 @@
   cursor: pointer;
 }
 
+.formulario select {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  color: #1e293b;
+  font: inherit;
+  background-color: #fff; /* Aseguramos fondo blanco */
+  cursor: pointer;
+}
 .formulario_acciones button[type="submit"] {
   border-color: #422d76;
   background: #422d76;

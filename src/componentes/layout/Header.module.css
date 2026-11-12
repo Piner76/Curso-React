@@ -18,21 +18,60 @@
 .nav {
   display: flex;
   list-style: none;
-  padding: 5px 0px 5px 700px;
+  padding: 0;
+  margin-left: auto; /* Reemplaza el padding de 700px para que sea responsivo */
+  gap: 1rem; /* Separación entre items */
+  align-items: center;
 }
 
 .nav a {
   color: #e0e0e0;
-  margin: 0 1rem;
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s;
 }
 
-.nav a:hover {
-  color: #ffb703;
+.nav a:hover, .active {
+  color: #ffb703 !important;
 }
 
+/* ESTILOS DEL MENÚ DESPLEGABLE */
+.dropdown_container {
+  position: relative;
+  padding: 10px 0; /* Para que el hover no se corte entre el link y el menú */
+}
+
+.dropdown_menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  list-style: none;
+  padding: 0.5rem 0;
+  margin: 0;
+  min-width: 150px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  z-index: 100;
+}
+
+.dropdown_menu li button {
+  background: none;
+  border: none;
+  color: #e0e0e0;
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.dropdown_menu li button:hover {
+  background-color: #333;
+  color: #ffb703;
+}
 .carrito {
   background-color: #1a1a1a;
   color: white;
@@ -56,3 +95,22 @@
   border-color: #ffb703;
   border-style: solid;
 } */
+
+.adminBadge {
+  background-color: #ffb703;
+  color: #131518;
+  padding: 0.3rem 0.6rem;
+  border-radius: 5px;
+  font-size: 0.75rem;
+  margin-left: 0.5rem;
+}
+.logoutButton {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 0.3rem 0.6rem;
+  border-radius: 5px;
+  font-size: 0.75rem;
+  margin-left: 0.5rem;
+  cursor: pointer;
+}

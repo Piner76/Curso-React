@@ -65,3 +65,13 @@
   margin: 0 auto;
   padding: 0 32px 48px 32px;
 }
+.linkTarjeta {
+  text-decoration: none;
+  color: inherit;
+  display: block; /* Asegura que el Link ocupe todo el espacio de la tarjeta */
+  transition: transform 0.2s ease;
+}
+
+.linkTarjeta:hover {
+  transform: scale(1.02); /* Opcional: un pequeño efecto al pasar el mouse */
+}

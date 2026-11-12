@@ -1,19 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import FormProducto from "./FormProducto";
 import { db } from "../../firebase/config";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { collection, addDoc, doc, deleteDoc } from "firebase/firestore";
+import { useProductos } from "../../context/ProductosContext";
+import { useCategorias } from "../../context/CategoriasContext";
 
 export function ContainerProducto() {
+  const { refrescarProductos } = useProductos();
+  const { categorias } = useCategorias();
+  // 1. Ajustamos el estado inicial para que use CategoriaId
   const [datosForm, setDatosForm] = useState({
-    Artnom: "",
+    CategoriaId: "",
     ProNom: "",
+    Descripcion: "",
     Precio: "",
     Stock: "",
     Activo: false,
   });
   const [imagenFile, setImagenFile] = useState(null);
 
-  // Función para manejar el cambio del input de tipo "file"
   const manejarCambioImagen = (evento) => {
     setImagenFile(evento.target.files[0]);
   };
@@ -29,19 +34,16 @@ export function ContainerProducto() {
   const manejarEnvio = async (evento) => {
     evento.preventDefault();
 
-    // Validamos que el usuario haya seleccionado una imagen
     if (!imagenFile) {
       alert("Por favor, selecciona una imagen para el producto.");
-      return;
+      return false;
     }
 
-    // API key de Imgbb
     const apiKey = "58905c0f753cf81c11e6252165534c12";
     const formData = new FormData();
     formData.append("image", imagenFile);
 
     try {
-      // 1. Subimos la imagen a Imgbb
       console.log("Subiendo imagen a Imgbb...");
       const respuestaImgbb = await fetch(
         `https://api.imgbb.com/1/upload?key=${apiKey}`,
@@ -56,75 +58,62 @@ export function ContainerProducto() {
         throw new Error("La subida de la imagen a Imgbb falló.");
       }
 
-      console.log("Imagen subida con éxito. URL:", datosImgbb.data.url);
-
-      // 2. Armamos el producto completo con la URL de la imagen
+      // 3. Guardamos el producto con el CategoriaId y la URL de la imagen
       const productoCompleto = {
         ...datosForm,
         Imagen: datosImgbb.data.url,
       };
-      console.log("Guardando el producto en Firestore:", productoCompleto);
 
-      // 3. Guardamos el producto en la colección "Productos" de Firestore
+      //console.log("Guardando el producto en Firestore:", productoCompleto);
       const productosRef = collection(db, "Productos");
       await addDoc(productosRef, productoCompleto);
 
-      alert("¡Producto guardado con éxito!");
-      // Limpiamos el formulario
+      //alert("¡Producto guardado con éxito!");
+
+      // 4. Reseteamos el form con los nombres correctos
       setDatosForm({
-        Categoria: "",
-        Producto: "",
+        CategoriaId: "",
+        ProNom: "",
+        Descripcion: "",
         Precio: "",
         Stock: "",
         Activo: false,
       });
       setImagenFile(null);
 
-      // Refrescamos la lista de productos para ver el nuevo en la tabla
-      await obtenerProductos();
+      await refrescarProductos();
+      return true; // Éxito para cerrar el modal
     } catch (error) {
       console.error("Error en el proceso de envío:", error);
-      alert(
-        "Hubo un error al guardar el producto. Por favor, intentá de nuevo.",
-      );
+      alert("Hubo un error al guardar el producto. Por favor, intentá de nuevo.");
+      return false;
     }
   };
 
-  // Obtenemos los productos directamente desde Firebase (Firestore)
-  const [productos, setProductos] = useState([]);
-  const [cargando, setCargando] = useState(true);
-
-  const obtenerProductos = async () => {
-    try {
-      setCargando(true);
-      const productosRef = collection(db, "Productos");
-      const snapshot = await getDocs(productosRef);
-      const listaProductos = snapshot.docs.map((documento) => ({
-        id: documento.id,
-        ...documento.data(),
-      }));
-      setProductos(listaProductos);
-    } catch (error) {
-      console.error("Error al obtener los productos desde Firebase:", error);
-    } finally {
-      setCargando(false);
+  const eliminarProducto = async (id) => {
+    const confirmacion = window.confirm(
+      "¿Estás seguro de que deseas eliminar este producto?",
+    );
+    if (confirmacion) {
+      try {
+        const docRef = doc(db, "Productos", id);
+        await deleteDoc(docRef);
+        await refrescarProductos(); // Actualizamos la lista de productos
+      } catch (error) {
+        console.error("Error al eliminar el producto:", error);
+        alert("Hubo un error al eliminar el producto. Por favor, intentá de nuevo.");
+      }
     }
   };
-
-  // Al montar el componente, traemos los productos desde Firebase
-  useEffect(() => {
-    obtenerProductos();
-  }, []);
 
   return (
     <FormProducto
       datosForm={datosForm}
-      productos={productos}
-      cargando={cargando}
-      obtenerProductos={obtenerProductos}
+      categorias={categorias} // Las categorías vienen del contexto
       manejarCambio={manejarCambio}
       manejarEnvio={manejarEnvio}
       manejarCambioImagen={manejarCambioImagen}
+      eliminarProducto={eliminarProducto}
     />
   );
 }

@@ -1,5 +1,5 @@
-import React, { useState, useContext, createContext } from "react";
-import { CgProductHunt } from "react-icons/cg";
+import { useState, useContext, createContext } from "react";
+
 
 // ● useState → para guardar y actualizar el carrito.
 // ● useContext → para poder consumir el contexto desde los componentes.

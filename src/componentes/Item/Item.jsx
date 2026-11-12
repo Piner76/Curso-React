@@ -1,15 +1,16 @@
 import styles from "./Item.module.css";
 import { useState } from "react";
 import { useCart } from "../../context/CartContext";
+import { Link } from "react-router-dom"; // <-- Importar Link
 
-function Item({ id, nombre, descripcion, precio, imagen, stock }) {
+function Item({ id, ProNom, Descripcion, Precio, Imagen, Stock }) {
   const [cantidad, setCantidad] = useState(0);
   const { addToCart } = useCart();
 
   const incrementar = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (cantidad < stock) {
+    if (cantidad < Stock) {
       setCantidad(cantidad + 1);
     }
   };
@@ -27,38 +28,38 @@ function Item({ id, nombre, descripcion, precio, imagen, stock }) {
     e.stopPropagation();
     if (cantidad === 0) return;
 
-    addToCart({ id, nombre, descripcion, precio, imagen }, cantidad);
+    addToCart({ id, ProNom, Descripcion, Precio, Imagen }, cantidad);
   };
 
   return (
-    // <Link to={`/producto/${id}`} className={styles.link}>
-    <article className={styles.card}>
-      <img src={imagen} alt={nombre} className={styles.imagen} />
-      <div className={styles.info}>
-        <p className={styles.precio}>$ {precio}</p>
-        {/* <h3>{nombre}</h3> */}
-        <p className={styles.descripcion}>{descripcion}</p>
+    // ENVOLVEMOS TODO CON EL LINK
+    <Link to={`/producto/${id}`} className={styles.link}>
+      <article className={styles.card}>
+        <img src={Imagen} alt={ProNom} className={styles.imagen} />
+        <div className={styles.info}>
+          <p className={styles.precio}>$ {Precio}</p>
+          <p className={styles.descripcion}>{Descripcion}</p>
 
-        <div className={styles.controles}>
-          <button onClick={decrementar} className={styles.botonCantidad}>
-            -
-          </button>
-          <p className={styles.cantidad}>{cantidad}</p>
-          <button onClick={incrementar} className={styles.botonCantidad}>
-            +
+          <div className={styles.controles}>
+            <button onClick={decrementar} className={styles.botonCantidad}>
+              -
+            </button>
+            <p className={styles.cantidad}>{cantidad}</p>
+            <button onClick={incrementar} className={styles.botonCantidad}>
+              +
+            </button>
+          </div>
+
+          <button
+            onClick={agregarAlCarrito}
+            className={styles.botonAgregar}
+            disabled={cantidad === 0}
+          >
+            Agregar al Carrito {cantidad}
           </button>
         </div>
-
-        <button
-          onClick={agregarAlCarrito}
-          className={styles.botonAgregar}
-          disabled={cantidad === 0}
-        >
-          Agregar al Carrito {cantidad}
-        </button>
-      </div>
-    </article>
-    // </Link>
+      </article>
+    </Link>
   );
 }
 
