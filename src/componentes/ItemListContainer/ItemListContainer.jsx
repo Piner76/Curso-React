@@ -19,7 +19,7 @@ function ItemListContainer({ mensaje }) {
 
   // Buscamos el nombre de la categoría para mostrarlo en el título
   const categoriaActual = categorias.find((cat) => cat.id === categoriaId);
-  
+    
   // Definimos el título dinámico
   let tituloMostrar = mensaje;
   if (categoriaId) {
@@ -39,7 +39,8 @@ function ItemListContainer({ mensaje }) {
       {!cargando && productosFiltrados.length > 0 && (
         <div className={styles.grid}>
           {productosFiltrados.map((producto) => (
-            <Item
+           
+         <Item
               key={producto.id}
               id={producto.id}
               ProNom={producto.ProNom}

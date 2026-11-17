@@ -6,12 +6,14 @@ export function Producto({
   manejarCambio,
   manejarEnvio,
   manejarCambioImagen,
+  modoEdicion = false,
   onCerrar,
 }) {
- 
-  const handleSubmit = (evento) => {
+
+  // Mensaje visual de ayuda por campo (usado en atributos nativos + validación JS)
+  const handleSubmit = async (evento) => {
     evento.preventDefault(); // Valor por defecto por si tarda en cargar
-    const exito = manejarEnvio(evento);
+    const exito = await manejarEnvio(evento);
 
     if (exito){
       onCerrar();
@@ -34,7 +36,9 @@ export function Producto({
       }}
     >
       <div className={styles.modal_header}>
-        <h2 id="titulo-form-producto">Alta de producto</h2>
+        <h2 id="titulo-form-producto">
+          {modoEdicion ? "Modificar producto" : "Alta de producto"}
+        </h2>
         <button
           type="button"
           className={styles.boton_cerrar}
@@ -71,6 +75,9 @@ export function Producto({
             value={datosForm.ProNom}
             onChange={manejarCambio}
             required
+            minLength={3}
+            maxLength={60}
+            placeholder="Mínimo 3 caracteres"
           />
         </label>
         <label>
@@ -80,6 +87,8 @@ export function Producto({
             value={datosForm.Descripcion}
             onChange={manejarCambio}
             rows={3}
+            maxLength={300}
+            placeholder="Máximo 300 caracteres"
           />
         </label>
         <label>
@@ -87,11 +96,12 @@ export function Producto({
           <input
             type="number"
             name="Precio"
-            min="0"
+            min="0.01"
             step="0.01"
             value={datosForm.Precio}
             onChange={manejarCambio}
             required
+            placeholder="Mayor a 0"
           />
         </label>
         <label>
@@ -104,15 +114,20 @@ export function Producto({
             value={datosForm.Stock}
             onChange={manejarCambio}
             required
+            placeholder="Entero ≥ 0"
           />
         </label>
         <label>
           Imagen
+          {modoEdicion && (
+            <small> (dejá vacío para conservar la imagen actual)</small>
+          )}
           <input
             type="file"
             placeholder="https://"
             name="img"
             onChange={manejarCambioImagen}
+            {...(!modoEdicion && { required: true })}
           />
         </label>
         <label className={styles.campo_checkbox}>
@@ -128,7 +143,9 @@ export function Producto({
           <button type="button" onClick={onCerrar}>
             Cancelar
           </button>
-          <button type="submit">Guardar producto</button>
+          <button type="submit">
+            {modoEdicion ? "Guardar cambios" : "Guardar producto"}
+          </button>
         </div>
       </form>
     </dialog>

@@ -5,9 +5,7 @@ import { Link } from "react-router-dom"; // 1. Importamos Link
 
 
   function Inicio() {
-   
-     const { categorias } = useCategorias();
-
+    const { categorias } = useCategorias();
     const handleCategoriaClick = (categoriaId) => {
     setMostrarMenu(false); // Cerramos el menú
     navigate(`/comprar?categoria=${categoriaId}`);
@@ -21,12 +19,6 @@ import { Link } from "react-router-dom"; // 1. Importamos Link
             <h1>Tu Tienda de Bebidas</h1>
             <p>Una experiencia refrescante en cada trago.</p>
           </div>
-          {/* <button
-            className={styles.botonComprar}
-            onClick={() => navigate("/productos")}
-          >
-            Comprar Ahora
-          </button> */}
         </section>
 
         {/* Texto de presentación */}

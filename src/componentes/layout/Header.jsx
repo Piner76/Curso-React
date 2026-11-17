@@ -32,18 +32,20 @@ function Header() {
           {user && user.rol === "admin" && (
             <li>
               <Link to="/alta">Gestion</Link>
-              <span className={styles.adminBadge}>!Hola, {user.email}</span>
+              <span className={styles.adminBadge}>¡Hola, {user.email}</span>
               <button onClick={logout} className={styles.logoutButton}>
                 Cerrar Sesión
               </button>
+
+   
+
             </li>
+            
           )}
           <li>
             <Link to="/">Inicio</Link>
           </li>
-          <li>
-            <Link to="/productos">Productos</Link>
-          </li>
+
           
           {/* MENÚ DESPLEGABLE DE COMPRAR */}
           <li 
@@ -80,8 +82,9 @@ function Header() {
         </ul>
       </nav>
       <div className={styles.carrito}>
-        <NavLink to="/carrito" />
-        🛒 {totalItems > 0 && <span>{totalItems}</span>}
+        <NavLink to="/carrito">
+          🛒 {totalItems > 0 && <span>{totalItems}</span>}
+        </NavLink>
       </div>
     </header>
   );

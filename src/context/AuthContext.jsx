@@ -1,4 +1,6 @@
 import { createContext, useState, useContext, useEffect } from 'react'; 
+import { db } from "../firebase/config";
+import { doc, getDoc } from "firebase/firestore";
 import { 
     getAuth, 
     onAuthStateChanged, 
@@ -6,8 +8,7 @@ import {
     createUserWithEmailAndPassword, 
     signInWithEmailAndPassword
 } from "firebase/auth"; 
-import { db } from "../firebase/config";
-import { doc, getDoc } from "firebase/firestore";
+
  
 // 1. Crear el contexto 
 export const AuthContext = createContext(); 
@@ -47,21 +48,26 @@ export const AuthProvider = ({ children }) => {
      useEffect(() => { 
         // onAuthStateChanged es el observador de Firebase 
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => { 
-            if (currentUser) { 
-                // Si hay un usuario, buscamos su rol en Firestore. 
-                const userDocRef = doc(db, "usuarios", currentUser.uid); 
-                const userDocSnap = await getDoc(userDocRef); 
-                if (userDocSnap.exists() && userDocSnap.data().rol === 'admin') { 
-               // Si el documento existe y tiene rol de admin, lo asignamos. 
-                    setUser({ ...currentUser, rol: 'admin' }); 
-                } else { 
-              // Para cualquier otro caso, es un usuario regular. 
-                    setUser({ ...currentUser, rol: 'user' }); 
-                } 
-            } else { 
-                setUser(null); 
-            } 
-            setLoading(false); 
+            try {
+                if (!currentUser) {
+                    setUser(null);
+                    return;
+                }
+
+                const userDocSnap = await getDoc(
+                    doc(db, "Usuarios", currentUser.uid)
+                );
+                const role = userDocSnap.data()?.Rol ?? userDocSnap.data()?.rol;
+                setUser({
+                    ...currentUser,
+                    rol: role === "admin" ? "admin" : "user",
+                });
+            } catch (error) {
+                console.error("Error al cargar el rol del usuario:", error);
+                setUser(currentUser ? { ...currentUser, rol: "user" } : null);
+            } finally {
+                setLoading(false);
+            }
         }); 
  
         // Limpiamos el observador al desmontar 

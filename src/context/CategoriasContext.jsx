@@ -13,8 +13,8 @@ export function CategoriasProvider({ children }) {
     const obtenerCategorias = async () => {
       try {
         const categoriasRef = collection(db, "Categorias");
-        const snapshot = await getDocs(categoriasRef);
-        const lista = snapshot.docs.map((doc) => ({
+        const Cat = await getDocs(categoriasRef);
+        const lista = Cat.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));

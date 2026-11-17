@@ -20,8 +20,8 @@
 }
 
 .imagen {
-  width: 100%;
-  max-width: 400px;
+  width: 80%;
+  max-width: 300px;
   border-radius: 12px;
   object-fit: cover;
 }
@@ -40,17 +40,21 @@
   color: #b0b0b0;
   font-size: 0.9rem;
   margin-bottom: 16px;
+  color: #1a1a1d;
 }
 
 .descripcion {
   margin-bottom: 16px;
   line-height: 1.5;
+  color: #1a1a1d;
 }
 
 .precio {
-  font-size: 1.8rem;
+  font-size: 1.1rem;
   font-weight: bold;
   margin-bottom: 8px;
+  color: #1a1a1d;
+  padding-bottom: 120px;
 }
 
 .stock {
@@ -76,6 +80,7 @@
   padding: 48px;
   text-align: center;
   font-size: 1.2rem;
+  color: black;
 }
 
 /* NUEVOS ESTILOS PARA EL CARRITO EN EL DETALLE */
@@ -84,6 +89,7 @@
   align-items: center;
   gap: 16px;
   margin-bottom: 16px;
+  color: #1a1a1d;
 }
 
 .botonCantidad {

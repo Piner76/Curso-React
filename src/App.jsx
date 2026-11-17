@@ -7,6 +7,7 @@ import Carrito from "./componentes/Carrito/Carrito";
 import { ContainerProducto } from "./componentes/Productos/ContainerProducto";
 import Login from "./componentes/Login/Login";
 import Registro from "./componentes/Registro/Registro";
+import Perfil from "./componentes/Perfil/Perfil";
 import ProtectedRoute from "./componentes/ProtectedRoute/ProtectedRoute";
 
 
@@ -25,7 +26,23 @@ function App() {
         <Route path="/registro" element={<Registro />} />
         <Route path="/login" element={<Login />} />
         <Route
+          path="/perfil"
+          element={
+            <ProtectedRoute>
+              <Perfil />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/alta"
+          element={
+            <ProtectedRoute rolesPermitidos={["admin"]}>
+              <ContainerProducto />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/panel"
           element={
             <ProtectedRoute rolesPermitidos={["admin"]}>
               <h1>Bienvenido al Panel de Administración</h1>

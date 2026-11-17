@@ -4,17 +4,19 @@
 
 .contenedor h2 {
   margin-bottom: 24px;
-  color: #eab308;
+  color: #151412;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-auto-rows: 1fr; /*  Hace que todas las filas midan lo mismo */
+  gap: 16px; 
 }
 
 .mensaje {
   padding: 48px;
   text-align: center;
   font-size: 1.2rem;
+  color: black;
 }

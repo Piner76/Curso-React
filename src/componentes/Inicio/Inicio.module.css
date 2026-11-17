@@ -2,7 +2,6 @@
   background-size: cover;
   background-position: center;
   border-radius: 8px;
-
   padding: 48px 32px;
   height: 220px;
   display: flex;
@@ -52,7 +51,6 @@
   color: #f4f4f4;
   text-align: center;
   padding: 24px 48px;
-
   border-radius: 8px;
   font-size: 1.6rem;
 }

@@ -1,40 +1,47 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "./Login.module.css";
-import { useAuth } from "../../context/AuthContext.jsx";
+import { Link, useNavigate } from "react-router-dom";
+import styles from "./Login.module.css";
+import { useAuth } from "../../context/AuthContext";
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { login } = useAuth();
-  const handleLogin = async (e) => {
-    e.preventDefault();
+  // usamos el custom hook
+  const { login } = useAuth(); 
+
+  const manejarLogin = async (evento) => {
+    evento.preventDefault();
     try {
       await login(email, password);
+      alert("¡Inicio de sesión exitoso!");
       navigate("/");
     } catch (error) {
-      console.error("Error al iniciar sesión:", error);
+      console.error("Error en el login:", error.code, error.message);
+      alert("Error: " + error.message);
     }
   };
 
   return (
-    <div className="login-container">
-      <h2>Iniciar Sesión</h2>
-      <form onSubmit={handleLogin}>
+    <div className={styles["login-container"]}>
+      <h2 className="text-blue">Iniciar Sesión</h2>
+      <form onSubmit={manejarLogin}>
         <input
           type="email"
-          placeholder="Email"
+          placeholder="Correo electrónico"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(evento) => setEmail(evento.target.value)}
         />
         <input
           type="password"
           placeholder="Contraseña"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(evento) => setPassword(evento.target.value)}
         />
-        <button type="submit">Iniciar Sesión</button>
+        <button type="submit">Ingresar</button>
+        <br/>
+        No estás registrado? <Link to="/registro">Regístrate</Link>
       </form>
     </div>
   );

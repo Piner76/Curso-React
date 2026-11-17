@@ -3,19 +3,15 @@ import { useParams, Link } from "react-router-dom";
 import styles from "./ItemDetailContainer.module.css";
 import { db } from "../../firebase/config";
 import { doc, getDoc } from "firebase/firestore";
-import { useCategorias } from "../../context/CategoriasContext";
 import { useCart } from "../../context/CartContext"; // 1. Importamos el carrito
 
 function ItemDetailContainer() {
   const { id } = useParams();
-  const { categorias } = useCategorias();
   const { addToCart } = useCart(); // 2. Traemos la función para agregar
 
   const [producto, setProducto] = useState(null);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
-  
-  // 3. Nuevo estado para manejar la cantidad a comprar
   const [cantidad, setCantidad] = useState(1);
 
   useEffect(() => {
@@ -25,7 +21,12 @@ function ItemDetailContainer() {
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-          setProducto({ id: docSnap.id, ...docSnap.data() });
+          const data = docSnap.data();
+          if (data.Activo === false) {
+            setProducto(null); // Lo tratamos como si no existiera
+          } else {
+            setProducto({ id: docSnap.id, ...data });
+          }
         } else {
           setProducto(null);
         }
@@ -51,9 +52,6 @@ function ItemDetailContainer() {
     return <p className={styles.mensaje}>Producto no encontrado.</p>;
   }
 
-  const categoria = categorias.find((cat) => cat.id === producto.CategoriaId);
-  const nombreCategoria = categoria ? categoria.CatNom : producto.CategoriaId;
-
   // 4. Funciones para los botones de cantidad
   const incrementar = () => {
     if (cantidad < producto.Stock) {
@@ -75,7 +73,7 @@ function ItemDetailContainer() {
 
   return (
     <div className={styles.detalle}>
-      <Link to="/productos" className={styles.volver}>
+      <Link to="/comprar" className={styles.volver}>
         ← Volver al catálogo
       </Link>
       <div className={styles.contenido}>
@@ -86,10 +84,10 @@ function ItemDetailContainer() {
         />
         <div className={styles.info}>
           <h2>{producto.ProNom}</h2>
-          <p className={styles.categoria}>{nombreCategoria}</p>
+          {/* <p className={styles.categoria}>{nombreCategoria}</p> */}
           <p className={styles.descripcion}>{producto.Descripcion}</p>
           <p className={styles.precio}>${producto.Precio}</p>
-          <p className={styles.stock}>Stock disponible: {producto.Stock}</p>
+          {/* <p className={styles.stock}>Stock disponible: {producto.Stock}</p> */}
           
           {/* 6. Renderizamos los controles si hay stock */}
           {producto.Stock > 0 ? (
