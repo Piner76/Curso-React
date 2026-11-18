@@ -1,6 +1,4 @@
-import styles from "./FormProducto.module.css";
-
-export function Producto({
+﻿export function Producto({
   datosForm,
   categorias = [],
   manejarCambio,
@@ -9,20 +7,15 @@ export function Producto({
   modoEdicion = false,
   onCerrar,
 }) {
-
-  // Mensaje visual de ayuda por campo (usado en atributos nativos + validación JS)
   const handleSubmit = async (evento) => {
-    evento.preventDefault(); // Valor por defecto por si tarda en cargar
+    evento.preventDefault();
     const exito = await manejarEnvio(evento);
-
-    if (exito){
-      onCerrar();
-    }
+    if (exito) onCerrar();
   };
 
   return (
     <dialog
-      className={styles.modal}
+      className="fixed left-1/2 top-1/2 z-50 m-0 -translate-x-1/2 -translate-y-1/2 w-[min(32rem,calc(100%-2rem))] max-h-[calc(100%-2rem)] overflow-y-auto p-6 rounded-xl text-slate-700 shadow-2xl backdrop:bg-slate-900/60 open:flex open:flex-col"
       aria-labelledby="titulo-form-producto"
       onCancel={(evento) => {
         evento.preventDefault();
@@ -35,28 +28,32 @@ export function Producto({
         if (dialogo && !dialogo.open) dialogo.showModal();
       }}
     >
-      <div className={styles.modal_header}>
-        <h2 id="titulo-form-producto">
+      <div className="flex items-center justify-between gap-4 mb-4">
+        <h2
+          id="titulo-form-producto"
+          className="text-xl font-semibold text-slate-800 m-0"
+        >
           {modoEdicion ? "Modificar producto" : "Alta de producto"}
         </h2>
         <button
           type="button"
-          className={styles.boton_cerrar}
+          className="text-slate-500 hover:text-slate-700 text-2xl leading-none cursor-pointer bg-transparent border-0"
           onClick={onCerrar}
           aria-label="Cerrar formulario"
         >
-          ×
+         X
         </button>
       </div>
-      <form className={styles.formulario} onSubmit={handleSubmit}>
-            
-        <label>
+
+      <form className="grid gap-4" onSubmit={handleSubmit}>
+        <label className="grid gap-1.5 text-sm text-slate-700">
           Categoría
           <select
             name="CategoriaId"
             value={datosForm.CategoriaId}
             onChange={manejarCambio}
             required
+            className="w-full px-3 py-2.5 border border-slate-300 rounded-md text-slate-800 bg-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
           >
             <option value="">Selecciona una categoría</option>
             {categorias.map((categoria) => (
@@ -66,8 +63,8 @@ export function Producto({
             ))}
           </select>
         </label>
-      
-        <label>
+
+        <label className="grid gap-1.5 text-sm text-slate-700">
           Producto
           <input
             type="text"
@@ -77,10 +74,12 @@ export function Producto({
             required
             minLength={3}
             maxLength={60}
-            placeholder="Mínimo 3 caracteres"
+            placeholder="Mánimo 3 caracteres"
+            className="w-full px-3 py-2.5 border border-slate-300 rounded-md text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
           />
         </label>
-        <label>
+
+        <label className="grid gap-1.5 text-sm text-slate-700">
           Descripción
           <textarea
             name="Descripcion"
@@ -89,9 +88,11 @@ export function Producto({
             rows={3}
             maxLength={300}
             placeholder="Máximo 300 caracteres"
+            className="w-full px-3 py-2.5 border border-slate-300 rounded-md text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent resize-none"
           />
         </label>
-        <label>
+
+        <label className="grid gap-1.5 text-sm text-slate-700">
           Precio
           <input
             type="number"
@@ -102,9 +103,11 @@ export function Producto({
             onChange={manejarCambio}
             required
             placeholder="Mayor a 0"
+            className="w-full px-3 py-2.5 border border-slate-300 rounded-md text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
           />
         </label>
-        <label>
+
+        <label className="grid gap-1.5 text-sm text-slate-700">
           Stock
           <input
             type="number"
@@ -114,36 +117,50 @@ export function Producto({
             value={datosForm.Stock}
             onChange={manejarCambio}
             required
-            placeholder="Entero ≥ 0"
+            placeholder="Entero 0-9999"
+            className="w-full px-3 py-2.5 border border-slate-300 rounded-md text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
           />
         </label>
-        <label>
+
+        <label className="grid gap-1.5 text-sm text-slate-700">
           Imagen
           {modoEdicion && (
-            <small> (dejá vacío para conservar la imagen actual)</small>
+            <small className="text-slate-500 font-normal">
+              (dejá vací­o para conservar la imagen actual)
+            </small>
           )}
           <input
             type="file"
-            placeholder="https://"
             name="img"
             onChange={manejarCambioImagen}
             {...(!modoEdicion && { required: true })}
+            className="w-full text-sm text-slate-600 file:mr-3 file:py-2 file:px-3 file:rounded-md file:border-0 file:bg-violet-600 file:text-white file:font-medium file:cursor-pointer hover:file:bg-violet-700"
           />
         </label>
-        <label className={styles.campo_checkbox}>
+
+        <label className="flex items-center gap-2 text-sm text-slate-700">
           <input
             type="checkbox"
             name="Activo"
             checked={datosForm.Activo}
             onChange={manejarCambio}
+            className="w-4 h-4 accent-violet-600"
           />
           Producto Activo
         </label>
-        <div className={styles.formulario_acciones}>
-          <button type="button" onClick={onCerrar}>
+
+        <div className="flex justify-end gap-3 mt-2">
+          <button
+            type="button"
+            onClick={onCerrar}
+            className="px-4 py-2 border border-slate-300 rounded-md bg-white text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer"
+          >
             Cancelar
           </button>
-          <button type="submit">
+          <button
+            type="submit"
+            className="px-4 py-2 bg-[#422d76] hover:bg-[#523a92] text-white rounded-md transition-colors cursor-pointer"
+          >
             {modoEdicion ? "Guardar cambios" : "Guardar producto"}
           </button>
         </div>

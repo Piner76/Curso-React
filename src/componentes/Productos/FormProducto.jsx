@@ -1,14 +1,11 @@
+﻿import { useState } from "react";
 import AbmToolbar from "../Botonera/Botonera";
-import styles from "./FormProducto.module.css";
-import Producto from "./Productos.jsx";
-import { useState } from "react";
+import ProductoModal from "./Productos.jsx";
 import { useProductos } from "../../context/ProductosContext";
-
-
 
 export function FormProducto({
   datosForm,
-  categorias,
+  categorias = [],
   manejarCambio,
   manejarEnvio,
   manejarCambioImagen,
@@ -17,115 +14,96 @@ export function FormProducto({
   idEditando,
   cancelarEdicion,
 }) {
-  // Los productos y el estado de carga vienen del contexto
   const { todosLosProductos, cargando } = useProductos();
   const [mostrarModal, setMostrarModal] = useState(false);
   const [idSeleccionado, setIdSeleccionado] = useState(null);
 
-  // Permite marcar/desmarcar un producto de la lista (solo uno a la vez)
-  const manejarSeleccion = (id, checked) => {
-    setIdSeleccionado(checked ? id : null);
+  const cerrarModal = () => {
+    if (idEditando) cancelarEdicion();
+    setMostrarModal(false);
   };
 
   return (
-    <div className={styles.tabla_container}>
-      <h3>Productos</h3>
+    <section className="mx-auto w-full max-w-6xl rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
+      <h2 className="mb-4 text-center text-xl font-semibold text-slate-800">Productos</h2>
+
       <AbmToolbar
         onAlta={() => {
-          if (idEditando) cancelarEdicion(); // si veníamos de editar, volvemos a modo alta
+          if (idEditando) cancelarEdicion();
           setMostrarModal(true);
         }}
         onModificar={() => {
-          if (idSeleccionado === null) {
+          if (!idSeleccionado) {
             alert("Seleccioná un producto de la tabla para modificar.");
             return;
           }
-          modificarProducto(idSeleccionado); // precarga los datos en el form
-          setMostrarModal(true); // reutilizamos el mismo modal del alta
+          modificarProducto(idSeleccionado);
+          setMostrarModal(true);
         }}
         onBaja={() => {
           eliminarProducto(idSeleccionado);
-          setIdSeleccionado(null); // limpiamos la selección tras la baja
+          setIdSeleccionado(null);
         }}
         haySeleccion={idSeleccionado !== null}
       />
 
-      <table className={styles.tabla}>
-        <thead>
-          <tr>
-            <th>Sel</th>
-            <th>ID</th>
-            <th>Categoría</th>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Stock</th>
-            <th>Activo</th>
-          </tr>
-        </thead>
-
-        <tbody className={styles.tabla_tbody}>
-          {cargando && (
+      <div className="mt-4 w-full overflow-x-auto rounded-lg border border-slate-200">
+        <table className="w-full border-collapse text-left text-sm text-slate-700">
+          <thead className="bg-slate-100 text-slate-600">
             <tr>
-              <td colSpan={6}>Cargando productos desde Firebase...</td>
+              <th className="px-4 py-3">Sel.</th>
+              <th className="px-4 py-3">ID</th>
+              <th className="px-4 py-3">Categoría</th>
+              <th className="px-4 py-3">Nombre</th>
+              <th className="px-4 py-3">Precio</th>
+              <th className="px-4 py-3">Stock</th>
+              <th className="px-4 py-3">Activo</th>
             </tr>
-          )}
-          {!cargando && todosLosProductos.length === 0 && (
-            <tr>
-              <td colSpan={6}>
-                No hay productos cargados en la base de datos.
-              </td>
-            </tr>
-          )}
-          {!cargando &&
-            todosLosProductos.map((producto) => (
+          </thead>
+          <tbody>
+            {cargando && (
+              <tr><td className="px-4 py-3" colSpan={7}>Cargando productos desde Firebase...</td></tr>
+            )}
+            {!cargando && todosLosProductos.length === 0 && (
+              <tr><td className="px-4 py-3" colSpan={7}>No hay productos cargados en la base de datos.</td></tr>
+            )}
+            {!cargando && todosLosProductos.map((producto) => (
               <tr
                 key={producto.id}
-                className={
-                  idSeleccionado === producto.id ? styles.fila_seleccionada : ""
-                }
+                className={`border-t border-slate-200 hover:bg-slate-50 ${idSeleccionado === producto.id ? "bg-violet-100" : ""}`}
               >
-                <td>
+                <td className="px-4 py-3">
                   <input
                     type="checkbox"
-                    name={`seleccion-${producto.id}`}
+                    aria-label={`Seleccionar ${producto.ProNom}`}
                     checked={idSeleccionado === producto.id}
-                    onChange={(e) =>
-                      manejarSeleccion(producto.id, e.target.checked)
-                    }
+                    onChange={(evento) => setIdSeleccionado(evento.target.checked ? producto.id : null)}
                   />
                 </td>
-                <td className={styles.dato_id}>{producto.id}</td>
-              
-             <td>
-  {categorias.find((categoria) => categoria.id === producto.CategoriaId)?.CatNom || "Sin categoría"}
-</td>
-              
-                <td>{producto.ProNom}</td>
-                <td className={styles.dato_id}>
-                  ${Number(producto.Precio).toFixed(2)}
-                </td>
-                <td>{producto.Stock}</td>
-                <td>{producto.Activo ? "Sí" : "No"}</td>
+                <td className="px-4 py-3 font-mono">{producto.id}</td>
+                <td className="px-4 py-3">{categorias.find((categoria) => categoria.id === producto.CategoriaId)?.CatNom || "Sin categoría"}</td>
+                <td className="px-4 py-3">{producto.ProNom}</td>
+                <td className="px-4 py-3">${Number(producto.Precio).toFixed(2)}</td>
+                <td className="px-4 py-3">{producto.Stock}</td>
+                <td className="px-4 py-3">{producto.Activo ? "Sí" : "No"}</td>
               </tr>
             ))}
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
 
       {mostrarModal && (
-        <Producto
+        <ProductoModal
           datosForm={datosForm}
           categorias={categorias}
           manejarCambio={manejarCambio}
           manejarEnvio={manejarEnvio}
           manejarCambioImagen={manejarCambioImagen}
           modoEdicion={idEditando !== null}
-          onCerrar={() => {
-            if (idEditando) cancelarEdicion(); // descartamos cambios al cerrar
-            setMostrarModal(false);
-          }}
+          onCerrar={cerrarModal}
         />
       )}
-    </div>
+    </section>
   );
 }
 

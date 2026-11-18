@@ -48,7 +48,7 @@ export function ContainerProducto() {
     const errores = [];
 
     if (!datos.CategoriaId) {
-      errores.push("Debes seleccionar una categoría.");
+      errores.push("Debes seleccionar una categoria.");
     }
 
     if (!datos.ProNom || datos.ProNom.trim().length < 3) {
@@ -94,7 +94,8 @@ export function ContainerProducto() {
     if (!datosImgbb.success) {
       throw new Error("La subida de la imagen a Imgbb falló.");
     }
-    return datosImgbb.data.url;
+
+    return datosImgbb.data.data.display_url || datosImgbb.data.data.url;
   };
 
   // ===================== ALTA (CREATE) =====================
@@ -147,7 +148,7 @@ export function ContainerProducto() {
       setIdEditando(null);
 
       await refrescarProductos();
-      return true; // Éxito para cerrar el modal
+      return true; 
     } catch (error) {
       console.error("Error en el proceso de envío:", error);
       alert(

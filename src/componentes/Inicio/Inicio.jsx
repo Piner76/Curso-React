@@ -1,44 +1,32 @@
-import styles from "./Inicio.module.css";
 import CardCategoria from "../CardCategoria/CardCategoria";
 import { useCategorias } from "../../context/CategoriasContext";
-import { Link } from "react-router-dom"; // 1. Importamos Link
+import { Link } from "react-router-dom";
 
+function Inicio() {
+  const { categorias } = useCategorias();
 
-  function Inicio() {
-    const { categorias } = useCategorias();
-    const handleCategoriaClick = (categoriaId) => {
-    setMostrarMenu(false); // Cerramos el menú
-    navigate(`/comprar?categoria=${categoriaId}`);
-  };
-
-    return (
-      <div>
-        {/* Banner principal */}
-        <section className={styles.banner}>
-          <div className={styles.bannerContenido}>
-            <h1>Tu Tienda de Bebidas</h1>
-            <p>Una experiencia refrescante en cada trago.</p>
-          </div>
-        </section>
-
-        {/* Texto de presentación */}
-        {/* <section className={styles.presentacion}>
-          <p>
-            Desde hace más de una década, nos dedicamos a ofrecer un universo de
-            sabores a través de nuestra extensa gama de bebidas. En{" "}
-            <strong>El Rincón del Brindis</strong>, entendemos que cada cliente es
-            único, por eso nos esforzamos por curar la mejor selección de bebidas,
-            desde las más clásicas hasta las más innovadoras.
+  return (
+    <div>
+      {/* Banner principal */}
+      <section className="relative flex h-64 items-center justify-center overflow-hidden rounded-lg bg-[url('/images/banner.jpg')] bg-cover bg-center">
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="relative text-center px-4">
+          <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2">
+            Tu Tienda de Bebidas
+          </h1>
+          <p className="text-lg sm:text-xl text-gray-200">
+            Una experiencia refrescante en cada trago.
           </p>
-        </section>  */}
-        
-        
-        <section className={styles.categorias}>
-          {categorias.map((categoria) => (
-           <Link 
-            key={categoria.id} 
-            to={`/comprar?categoria=${categoria.id}`} 
-            className={styles.linkTarjeta} // Para quitar el subrayado
+        </div>
+      </section>
+
+      {/* Categorías */}
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1400px] mx-auto px-4 sm:px-8 py-12">
+        {categorias.map((categoria) => (
+          <Link
+            key={categoria.id}
+            to={`/comprar?categoria=${categoria.id}`}
+            className="block no-underline text-inherit transition-transform duration-200 hover:scale-[1.02]"
           >
             <CardCategoria
               imagen={categoria.Imagen}
@@ -46,23 +34,10 @@ import { Link } from "react-router-dom"; // 1. Importamos Link
               descripcion={categoria.Descripcion}
             />
           </Link>
-          ))}
-        </section>  
+        ))}
+      </section>
+    </div>
+  );
+}
 
-        {/* <section className={styles.categorias}>
-          {arrayCategorias.map((categoria) => (
-            <CardCategoria
-              key={categoria.id}
-              imagen={categoria.Imagen}
-              titulo={categoria.CatNom}
-              descripcion={categoria.Descripcion}
-            />
-          ))}
-        </section>  */}
-
-
-            </div>
-    );
-  }
-
-  export default Inicio;
+export default Inicio;
