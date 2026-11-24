@@ -108,6 +108,13 @@ function Header() {
               </span>
             )}
           </NavLink>
+
+          {/* Login desktop */}
+          {!user && (
+            <NavLink to="/login" className={navLinkClass}>
+              Iniciar Sesión
+            </NavLink>
+          )}
         </nav>
 
         {/* Botón hamburguesa (móvil) */}
@@ -215,6 +222,22 @@ function Header() {
               </span>
             )}
           </NavLink>
+
+          {!user && (
+          <NavLink
+            to="/login"
+            onClick={() => setMenuMovil(false)}
+            className={({ isActive }) =>
+              `block px-3 py-2 rounded-lg text-sm no-underline transition-colors ${
+                isActive
+                  ? "bg-[#1a1a1a] text-[#ffb703]"
+                  : "text-[#e0e0e0] hover:bg-[#1a1a1a] hover:text-[#ffb703]"
+              }`
+            }
+          >
+            Iniciar Sesión
+          </NavLink>
+          )}
         </div>
       )}
     </header>

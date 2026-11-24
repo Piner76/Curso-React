@@ -25,8 +25,7 @@ function App() {
         <Route path="/carrito" element={<Carrito />} />
         <Route path="/registro" element={<Registro />} />
         <Route path="/login" element={<Login />} />
-        <Route
-          path="/perfil"
+        <Route path="/perfil" 
           element={
             <ProtectedRoute>
               <Perfil />
