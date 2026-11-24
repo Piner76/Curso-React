@@ -10,7 +10,7 @@ export const TituloCarrito = styled.h2`
   color: #5a3d2b;
   font-weight: 700;
   letter-spacing: 0.5px;
-  border-bottom: 3px solid #b58a5a;
+ 
   display: inline-block;
   padding-bottom: 0.25rem;
   margin-bottom: 1.5rem;

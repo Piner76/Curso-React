@@ -19,7 +19,7 @@ function Carrito() {
   return (
     <CarritoWrapper>
       <div className="max-w-5xl mx-auto px-4">
-        <TituloCarrito>🍷 Carrito de compras</TituloCarrito>
+        <TituloCarrito> Carrito de compras</TituloCarrito>
 
         {cart.length === 0 ? (
           <div className="bg-amber-50 border border-amber-200 rounded-lg shadow-sm p-5">
@@ -27,9 +27,9 @@ function Carrito() {
               Tu carrito está vacío.{" "}
               <Link
                 to="/comprar"
-                className="text-amber-700 font-semibold underline hover:text-amber-900"
+                className="text-amber-700 font-semibold hover:text-amber-900"
               >
-                ¡Ve a comprar algo rico! 🥂
+                ¡Ve a comprar algo rico! 
               </Link>
             </CarritoVacio>
           </div>

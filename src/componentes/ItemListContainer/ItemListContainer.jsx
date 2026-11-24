@@ -69,11 +69,12 @@ function ItemListContainer({ mensaje }) {
 
   return (
     <div className={styles.contenedor}>
-      <h2>{tituloMostrar}</h2>
+      {/* Título y buscador en la misma línea, alineados verticalmente */}
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
+        <h2 className="m-0">{tituloMostrar}</h2>
 
-      {/* Barra de búsqueda en tiempo real (Tailwind) */}
-      <div className="-mt-6 mb-8 max-w-md mx-auto">
-        <div className="relative">
+        {/* Barra de búsqueda en tiempo real (Tailwind) */}
+        <div className="relative w-full sm:w-72">
           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
             🔍
           </span>

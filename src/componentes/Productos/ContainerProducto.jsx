@@ -95,7 +95,19 @@ export function ContainerProducto() {
       throw new Error("La subida de la imagen a Imgbb falló.");
     }
 
-    return datosImgbb.data.data.display_url || datosImgbb.data.data.url;
+    /*
+     * Imgbb devuelve varias URLs dentro de datosImgbb.data:
+     *  - data.url          → página del visor (https://ibb.co/xxx) NO sirve para <img>
+     *  - data.display_url  → imagen directa (https://i.ibb.co/xxx.jpg) ✓
+     *  - data.image.url    → imagen directa alternativa
+     * Usamos encadenamiento opcional (?.) para no romper si algún campo falta.
+     */
+    const urlDirecta =
+      datosImgbb.data?.display_url || datosImgbb.data?.image?.url;
+    if (!urlDirecta) {
+      throw new Error("Imgbb no devolvió una URL de imagen válida.");
+    }
+    return urlDirecta;
   };
 
   // ===================== ALTA (CREATE) =====================
